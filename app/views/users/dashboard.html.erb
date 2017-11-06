@@ -1,0 +1,23 @@
+<div class="container">
+  <h3 style="color: #7C7C7D; padding-bottom: 25px; padding-top: 25px; text-align: center;">Hello <%= current_user.first_name.to_s %>, check out your bots!
+      <p id="notice"><%= notice %></p>
+  </h3>
+  <div class="row col-lg-12" style="text-align: center;">
+    <table>
+      <tbody>
+        <% if @your_voted_robots.blank? %>
+          ...You have not voted for any robots.
+        <% else %>
+          <% @your_voted_robots.each do |robot| %>
+            <div class="col-lg-4" style="background-color: white; border: 30px solid #F8F9FA !important;">
+              <%= link_to image_tag(robot.image.url(:medium)), robot, class: '' %>
+              <p><%= robot.name %></p>
+              <%= robot.user_votes.count %>
+            </div>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+  </div>
+</div>

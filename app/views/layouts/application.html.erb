@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PopularBot</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body style="background-color: #F8F9FA;" >
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white;">
+    <%= link_to image_tag('/assets/logo.svg', :alt => "Robot Logo", :class => "css", :style => "padding-right: 30px; padding-bottom: 10px; height: 75px;"), authenticated_root_path %>
+    <% unless current_user.nil? %>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <h4><%= link_to 'Robots', robots_path, class: "nav-link" %></h4>
+        </li>
+        <li class="nav-item">
+          <h4><%= link_to 'Results', results_robots_path, class: "nav-link" %></h4>
+        </li>
+      </ul>
+    <% end %>
+    <% if current_user.present? %>
+      <ul class="navbar-nav ml-auto">
+        <% if current_user.admin? %>
+          <li class="nav-item">
+            <h4><%= link_to 'Admin', new_robot_path, class: "nav-link" %></h4>
+          </li>
+        <% end %>
+        <li class="nav-item">
+          <h4><%= link_to('Logout', destroy_user_session_path, method: :delete,  class: "nav-link") %></h4>
+        </li>
+      </ul>
+    <% else %>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <h4><%= link_to('Login', new_user_session_path,  class: "nav-link") %></h4>
+        </li>
+      </ul>
+    <% end %>
+  </nav>
+<%= yield %>
+
+</body>
+</html>

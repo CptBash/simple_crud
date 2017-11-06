@@ -1,0 +1,40 @@
+<%= form_for @robot do |f| %>
+  <% if @robot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@robot.errors.count, "error") %> prohibited this robot from being saved:</h2>
+
+      <ul>
+      <% @robot.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, style: 'padding-top: 65px;' %><br>
+    <% if params[:action] == 'edit' %>
+      <%= f.text_field :name, style: 'width: 50%' %>
+    <% else %>
+      <%= f.text_field :name, style: 'width: 90%' %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :image %><br>
+    <% if params[:action] == 'edit' %>
+      <%= f.file_field :image, class: 'form-control', style: 'width: 50%; margin-left: 25%;' %>
+    <% else %>
+      <%= f.file_field :image, class: 'form-control', style: 'width: 88%; margin-left: 15px;' %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :user_id, value: current_user.id %>
+  </div>
+  <div class="actions" style="padding-top: 15px; padding-bottom: 40px;">
+    <% if params[:action] == 'edit' %>
+      <%= f.submit 'Update Robot', class: 'btn btn-info' %>
+    <% else %>
+      <%= f.submit 'Add Robot', class: 'btn btn-info' %>
+    <% end %>
+  </div>
+<% end %>

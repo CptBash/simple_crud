@@ -1,0 +1,23 @@
+<div class="container">
+  <h3 style="color: #7C7C7D; padding-bottom: 25px; padding-top: 25px; text-align: center;">Vote Here!
+    <p id="notice"><%= notice %></p>
+  </h3>
+  <div class="row col-lg-12" style="text-align: center;">
+    <table>
+      <tbody>
+        <% @robots.each do |robot| %>
+          <div class="col-lg-4" style="background-color: white; border: 30px solid #F8F9FA !important;">
+            <%= link_to image_tag(robot.image.url(:medium)), robot, class: '' %>
+            <p><%= robot.name %></p>
+            <% if @your_voted_robots.any?{|voted_bot| voted_bot == robot } %>
+              <%= button_tag 'Voted', class: 'btn btn-warning', style: 'margin-bottom: 15px;', disabled: true %>
+            <% else %>
+              <%= link_to 'Vote', { controller: :user_votes, action: :create, :user_id => current_user.id, :robot_id => robot.id },  method:"post", class: 'btn btn-success', style: 'margin-bottom: 15px;' %>
+            <% end %>
+          </div>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+  </div>
+</div>

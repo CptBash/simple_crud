@@ -1,0 +1,20 @@
+<div class="container">
+  <h3 style="color: #7C7C7D; padding-bottom: 25px; padding-top: 25px; text-align: center;">Admin</h3>
+  <div class="row col-lg-12" style="text-align: center;">
+    <p id="notice"><%= notice %></p>
+    <table>
+      <tbody>
+        <% @robots.each do |robot| %>
+          <div class="col-lg-4" style="background-color: white; border: 30px solid #F8F9FA !important;">
+            <%= link_to image_tag(robot.image.url(:medium)), robot, class: 'col-lg-1' %>
+            <p style="font-size: 25px; color: #7C7C7D;"><%= robot.name%></p>
+            <%= link_to 'Edit', edit_robot_path(robot), class: 'btn btn-info', style: 'margin-bottom: 10px;' %></td>
+            <%= link_to 'Destroy', robot, method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger', style: 'margin-bottom: 10px;' %>
+          </div>
+        <% end %>
+        <div class="col-lg-4" style="color: #7C7C7D; background-color: white; border: 30px solid #F8F9FA !important; padding-top: 25px; font-size: 25px;"><b>Add Robot</b><%= render 'form' %></div>
+      </tbody>
+    </table>
+    <br>
+  </div>
+</div>
